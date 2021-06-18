@@ -37,11 +37,25 @@ export const todoSlice = createSlice({
         return item;
       });
     },
+    setFilter: (state, action: PayloadAction<FilterType>) => {
+      state.filter = action.payload;
+    },
   },
 });
 
-export const { addTodo, removeTodo, toggleCompleted } = todoSlice.actions;
+export const {
+  addTodo, removeTodo, toggleCompleted, setFilter,
+} = todoSlice.actions;
 
-export const selectTodos = (state: RootState) => state.todo.todos;
+export const selectTodos = (state: RootState) => {
+  if (state.todo.filter === FilterType.Active) {
+    return state.todo.todos.filter((item: Todo) => !item.completed);
+  }
+  if (state.todo.filter === FilterType.Done) {
+    return state.todo.todos.filter((item: Todo) => item.completed);
+  }
+
+  return state.todo.todos;
+};
 
 export default todoSlice.reducer;

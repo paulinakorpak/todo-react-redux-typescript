@@ -1,11 +1,11 @@
-import React, { KeyboardEvent } from 'react';
+import React from 'react';
 import { useAppDispatch } from '../../../../app/hooks';
 import { addTodo } from '../../todoSlice';
 
 function Form() {
   const dispatch = useAppDispatch();
 
-  const handleChange = (e: KeyboardEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && e.currentTarget.value !== '') {
       const todo = {
         id: Date.now(),
