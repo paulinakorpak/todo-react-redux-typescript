@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import FilterType from './filterType';
+// eslint-disable-next-line import/no-cycle
+import { RootState } from '../../app/store';
 
 export interface Todo {
   id: number,
@@ -28,5 +30,7 @@ export const todoSlice = createSlice({
 });
 
 export const { addTodo } = todoSlice.actions;
+
+export const selectTodos = (state: RootState) => state.todo.todos;
 
 export default todoSlice.reducer;

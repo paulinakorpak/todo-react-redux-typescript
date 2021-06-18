@@ -1,14 +1,16 @@
 import React from 'react';
 import ListGroup from 'react-bootstrap/ListGroup';
-import Item from '../Item/index';
+import { useAppSelector } from '../../../../app/hooks';
+import { selectTodos, Todo } from '../../todoSlice';
+import Item from '../Item';
 
 function List() {
+  const todos = useAppSelector(selectTodos);
+
   return (
     <div className="w-100">
       <ListGroup>
-        <Item />
-        <Item />
-        <Item />
+        {todos.map((item: Todo) => <Item key={item.id} item={item} />)}
       </ListGroup>
     </div>
   );
